@@ -1,0 +1,14 @@
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.100.223:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+ERROR:root:Failed to connect to the reader: Unable to connect with protocol: T0 or T1. The specified reader is not currently available for use. : The specified reader is not currently available for use.  (0x80100017)
+ERROR:root:Failed to connect to the reader: Unable to connect: The smart card has been removed, so that further communication is not possible.  (0x80100069)
+ERROR:root:Failed to connect to the reader: Unable to connect: The smart card has been removed, so that further communication is not possible.  (0x80100069)
+ERROR:root:Failed to connect to the reader: Unable to connect: The smart card has been removed, so that further communication is not possible.  (0x80100069)
+ERROR:root:Failed to connect to the reader: Unable to connect: The smart card has been removed, so that further communication is not possible.  (0x80100069)
+ERROR:root:Failed to connect to the reader: Unable to connect: The smart card has been removed, so that further communication is not possible.  (0x80100069)
+ERROR:root:Failed to connect to the reader: Unable to connect: The smart card has been removed, so that further communication is not possible.  (0x80100069)
+ERROR:root:Failed to connect to the reader: Unable to connect: The smart card has been removed, so that further communication is not possible.  (0x80100069)

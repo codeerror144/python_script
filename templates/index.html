@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Monitoring System</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            text-align: center;
+            overflow: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* Moving Header */
+        .header-container {
+            position: relative;
+            background-color: #3f51b5;
+            height: 50px;
+            overflow: hidden;
+        }
+
+        .moving-text {
+            position: absolute;
+            white-space: nowrap;
+            font-size: 30px;
+            color: white;
+            font-weight: bold;
+            animation: moveText 10s linear infinite;
+        }
+
+        @keyframes moveText {
+            from {
+                left: 100%;
+            }
+            to {
+                left: -100%;
+            }
+        }
+
+        /* Time Display */
+        .time {
+            font-size: 60px;
+            color: #3f51b5;
+            margin: 20px 0;
+        }
+
+        /* Dashboard Container */
+        .dashboard {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin: 90px auto;
+        }
+
+        .dashboard-box {
+            background-color: #3f51b5;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            width: 250px;
+            padding: 30px;
+            border: 2px solid #000;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+        }
+
+        /* Buttons */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 40px; 
+            margin-top: 50px;
+        }
+
+        button {
+            font-size: 18px;
+            background-color: #3f51b5;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #2c3e8c;
+        }
+
+        /* Logout Button */
+        .logout-container {
+            text-align: right;
+            padding: 10px 20px;
+        }
+
+        .logout-button {
+            font-size: 16px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .logout-button:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <!-- Logout Button -->
+    <div class="logout-container">
+        <button class="logout-button" onclick="logout()">Logout</button>
+    </div>
+
+    <!-- Moving Header -->
+    <div class="header-container">
+        <div class="moving-text">Real Time Monitoring System</div>
+    </div>
+
+    <!-- Time Display -->
+    <div class="time" id="current_time">00:00:00</div>
+
+    <!-- Dashboard Stats -->
+    <div class="dashboard">
+        <div class="dashboard-box" id="users_logged_today">Users Logged In Today: 0</div>
+        <div class="dashboard-box" id="recent_entries">Recent Entries: 0</div>
+        <div class="dashboard-box" id="active_users">Active Users: 0</div>
+    </div>
+
+    <!-- Buttons (Centered Below) -->
+    <div class="buttons">
+        <button onclick="runScript('/run_facial_recognition')">LogBook Monitoring</button>
+        <button onclick="runScript('/run_attendance')">Employee Attendance</button>
+    </div>
+
+    <!-- JavaScript for Fetching Data, Time, and Logout -->
+    <script>
+        // Fetch and display dashboard data
+        async function fetchDashboardData() {
+            const response = await fetch('/dashboard_data');
+            const data = await response.json();
+
+            document.getElementById("users_logged_today").innerText = "Users Logged In Today: " + data.users_logged_today;
+            document.getElementById("recent_entries").innerText = "Recent Entries: " + data.recent_entries;
+            document.getElementById("active_users").innerText = "Active Users: " + data.active_users;
+        }
+
+        // Run Scripts
+        async function runScript(url) {
+            const response = await fetch(url);
+            const result = await response.text();
+            alert(result);
+        }
+
+        // Update time display
+        function updateTime() {
+            const now = new Date();
+            const formattedTime = now.toLocaleTimeString();
+            document.getElementById("current_time").innerText = formattedTime;
+        }
+        setInterval(updateTime, 1000); // Update time every second
+
+        // Fetch dashboard data on page load
+        window.onload = () => {
+            fetchDashboardData();
+            updateTime();
+        };
+
+        // Logout Function
+        function logout() {
+            window.location.href = "login.html";
+        }
+    </script>
+</body>
+</html>
